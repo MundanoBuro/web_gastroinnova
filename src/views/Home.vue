@@ -1,6 +1,7 @@
 <template>
   <div class="home">
 
+<h2>TESTING DEVOPS</h2>
       <v-slider/> 
 
       <div class="row">
