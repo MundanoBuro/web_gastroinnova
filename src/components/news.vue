@@ -4,12 +4,15 @@
             <div class="content">
                 <h2>NEWS FEED</h2>
                 <ul>
-                    <li v-for="item in news" v-bind:key="item.id">
+                    <li v-for="item in news">
                         <div class="col date">
-                           <span> {{ new Date() | moment("YYYY/MM/DD")  }} </span> <br>
-                           <span> {{ new Date() | moment("hh:mm")  }} </span>
+                           <span> {{ item.date | moment("YYYY/MM/DD")  }} </span> <br>
+                           <span> {{ item.date | moment("hh:mm")  }} </span>
+
                         </div>
-                        <div class="col text">{{ item.text }}</div>
+                        <div class="col text" style="width:300px;">          
+                                {{ item.content }}
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -18,49 +21,45 @@
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
   name: 'vNews',
 
   // Component's created function.
   created () {
-   
+    
+    const firestore = firebase.firestore();
+    firestore.settings({ timestampsInSnapshots: true });
+    firestore.collection("News").get().then(snapshot => {
+
+        snapshot.forEach(doc => {
+
+            let doc_data = doc.data();
+            this.news.push({
+                date : doc_data.date.toDate(),
+                content: doc_data.content
+            })
+            console.log(doc_data.date.seconds)
+        });
+
+    });
+
+  },
+
+  methods:{ 
+
+            toDateTime(secs) {
+                var t = new Date(1970, 0, 1); // Epoch
+                t.setSeconds(secs);
+                return t;
+            }
   },
 
   // Component's Attributes or data object.
   data () {
     return {
-        news : [
-            {
-                id: 0,
-                date : new Date(),
-                text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna '
-            },
-            {
-                 id: 1,
-                date : new Date(),
-                text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna '
-            },
-            {
-                 id: 2,
-                date : new Date(),
-                text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna '
-            },
-            {
-                 id: 3,
-                date : new Date(),
-                text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna '
-            },
-            {
-                 id: 4,
-                date : new Date(),
-                text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna '
-            },
-            {
-                 id: 5,
-                date : new Date(),
-                text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna '
-            }
-        ]
+        news : []
     }
   }
 }
