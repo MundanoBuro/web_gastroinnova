@@ -1,4 +1,4 @@
-<template>
+np<template>
     <div class="slider">
 
     <!-- swiper -->
@@ -19,12 +19,19 @@
 </template>
 
 <script>
+
+import firebase from "firebase";
+
 export default {
+
   name: 'vSlider',
 
   // Component's created function.
   created () {
-   
+
+
+
+
   },
 
   // Component's Attributes or data object.
@@ -76,8 +83,16 @@ export default {
     height: 70vh;
 }
 img{
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+@media (min-width: 600px) {
+img{
   width: 100%;
   object-fit: cover;
   object-position: 50% 50%;
+}
 }
 </style>

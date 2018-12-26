@@ -79,18 +79,42 @@
     </div>
 
     <div class="mobile">
-      <header>
+      <header v-bind:style= "[!isActive ? {'height':'4em'} : {'height':'20em'}]">
 
-        <div class="row">
+        <div class="row logoAndButton">
+
           <router-link to="/">
-            <img class="logo" src="./../assets/header/gi-header-logo.png">
+            <img class="logo" src="./../assets/header/gi-header-logo.png" @click="isActive = false">
           </router-link>
 
-          <hamburger-button :active="expanded" @update:active="value => expanded = value" :barStyle="barStyle"></hamburger-button>
+          <burger-button
+              :active="isActive"
+              :bar-color="isActive ? 'gray' : 'gray'"
+              :bar-height="4"
+              :bar-width="30"
+              @click="isActive = !isActive"/>
 
         </div>
 
         <div class="row">
+
+          <ul class="links" v-if="isActive">
+            <li @click="isActive = !isActive">
+              <router-link to="/about">NOSOTROS</router-link>
+            </li>
+            <li @click="isActive = !isActive">
+              <router-link to="/business">LÍNEAS DE NEGOCIO</router-link>
+            </li>
+            <li @click="isActive = !isActive">
+              <router-link to="/info">INFORMACIÓN FINANCIERA</router-link>
+            </li>
+            <li @click="isActive = !isActive">
+              <router-link to="/clients">CLIENTES</router-link>
+            </li>
+            <li @click="isActive = !isActive">
+              <router-link to="/contact">CONTACTO</router-link>
+            </li>
+          </ul>
 
         </div>
 
@@ -101,8 +125,12 @@
 </template>
 
 <script>
+
+import BurgerButton from 'vue-burger-button';
+
 export default {
   name: 'vHeader',
+  components: { BurgerButton },
   methods:{
     setMenuHover(tag,state){
       this.MENU[tag] = state;
@@ -110,10 +138,7 @@ export default {
   },
   data(){
     return{
-       expanded: false,
-      barStyle: {
-        backgroundColor: 'red'
-      },
+      isActive: false,
       MENU:{
         about: false,
         business: false,
@@ -125,25 +150,52 @@ export default {
   }
 }
 </script>
-
+<style src="vue-burger-button/dist/vue-burger-button.css"></style>
 <style scoped lang="less">
 
 .mobile{
-  .row{
+  .row,ul{
     padding: 0px;
     margin: 0px;
+    list-style-type: none;
   }
   header{
+    height: 4em;
+    z-index: 100;
+    -webkit-transition: height 0.5s ease-in-out;
+    -moz-transition: height 0.5s ease-in-out;
+    -ms-transition: height 0.5s ease-in-out;
+    -o-transition: height 0.5s ease-in-out;
+    transition: height 0.5s ease-in-out;
     a{
       display:inline-block;
       width: auto;
       height: auto;
     }
     .logo{
-      width: 4em;
-      padding: 0.5em;
+      width: 5.5em;
+      padding: 1em;
+      padding-left: 2em;
     }
 
+display: block;
+
+    .row{
+      width: 100vw;
+      z-index: 100;
+      &:last-child{
+        z-index: 50
+      }
+    }
+
+  }
+
+  .logoAndButton{
+
+    width: 100vw;;
+
+    border-bottom: 1px solid green;
+   
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -153,13 +205,32 @@ export default {
     -webkit-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-align-content: stretch;
-    -ms-flex-line-pack: stretch;
-    align-content: stretch;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    button{
+      position: relative;
+      left: -2em;
+      outline: none;
+    }
+  }
 
+  .links{
+    width: 100vw;
+  }
+  .links li{
+    width: 100vw;
+    margin:1.25em auto;
+    text-align: center;
+    a{
+      color: black;
+    }
   }
 }
 

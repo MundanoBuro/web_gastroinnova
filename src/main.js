@@ -23,6 +23,8 @@ Vue.use(require('vue-moment'));
 
 
 var VueScrollTo = require('vue-scrollto');
+var firebase = require('firebase/app');
+
 var options = {
   container: '#app',
   easing: 'ease-in',
@@ -42,6 +44,15 @@ var options = {
   y: true
 }
 
+var config = {
+  apiKey: "AIzaSyBOt3k5zNJ34ii-pVyojeMvOTNt_D0tM34",
+  authDomain: "web-gastroinnova.firebaseapp.com",
+  databaseURL: "https://web-gastroinnova.firebaseio.com",
+  projectId: "web-gastroinnova",
+  storageBucket: "web-gastroinnova.appspot.com",
+  messagingSenderId: "418551106596"
+};
+firebase.initializeApp(config);
 Vue.config.productionTip = false
 
 new Vue({

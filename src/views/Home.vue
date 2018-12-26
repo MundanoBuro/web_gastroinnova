@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-
-<h2>TESTING DEVOPS</h2>
+      
       <v-slider/> 
 
       <div class="row">
@@ -41,6 +40,36 @@ export default {
 
 <style scoped lang="less">
 .row{
+  display: block;
+}
+.col{
+  width: 100%;
+
+  padding: 0px;
+  margin: 0px;
+
+   display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+@media (min-width: 600px) {
+.row{
     width: 100%;
     max-width: 1200px;
     display: block;
@@ -68,29 +97,6 @@ export default {
 }
 .col{
   width: 50%;
-
-  padding: 0px;
-  margin: 0px;
-
-   display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-align-content: center;
-    -ms-flex-line-pack: center;
-    align-content: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
+  }
 }
-
-
 </style>

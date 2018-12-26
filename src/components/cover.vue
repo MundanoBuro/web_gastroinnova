@@ -1,10 +1,10 @@
 <template>
     <div class="cover">
         <router-link to="/business">
-            <img :src="imgSrc">
+            <img :src="cover.src">
             <div class="title">
                 <img src="img/cover/div.png">
-                <h1>{{ coverTitle }}</h1>
+                <h1>{{ cover.title }}</h1>
             </div>
         </router-link>               
     </div>
@@ -16,14 +16,32 @@ export default {
 
   // Component's created function.
   created () {
-   
+    this.cover = this.getRandomCover();
+  },
+
+  methods:{
+    getRandomCover(){
+      let randomInt = Math.floor(Math.random() * 2) + 0;
+      return this.covers[randomInt] 
+    }
   },
 
   // Component's Attributes or data object.
   data () {
     return {
-      imgSrc : "img/cover/cover1.jpg",
-      coverTitle : "DELIZ"
+      cover:{},
+      covers: [
+        {
+          src: "img/cover/cover1.jpg",
+          title: "DLZ"
+        },{
+          src: "img/cover/cover2.jpg",
+          title: "READY MEALS"
+        },{
+          src: "img/cover/cover3.jpg",
+          title: "START UPS"
+        }
+      ]
     }
   }
 }
@@ -38,6 +56,7 @@ ul{
   box-sizing: border-box;
   padding: 1em;
   padding-right: 0em;
+  padding-bottom: 0em;
   img{
     width: 100%;
   }
@@ -79,5 +98,15 @@ ul{
 
     font-size: 14px;
   }
+}
+
+@media (min-width: 600px) {
+  .cover{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1em;
+  padding-right: 0em;
+
+}
 }
 </style>
