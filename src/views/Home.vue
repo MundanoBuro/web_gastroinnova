@@ -16,6 +16,8 @@
 </template>
 
 <script>
+
+
 // @ is an alias to /src
 import vNews from './../components/news'
 import vCover from './../components/cover'
