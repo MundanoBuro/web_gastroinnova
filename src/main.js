@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import Vuetify from 'vuetify'
 import VueAnalytics from 'vue-analytics'
 import BootstrapVue from 'bootstrap-vue'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
@@ -13,12 +14,16 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'swiper/dist/css/swiper.css'
 
+
+import 'firebase/storage'; 
+
 Vue.use(VueAnalytics, {
   id: 'UA-128950882-1'
 })
+Vue.use(Vuetify)
 Vue.use(BootstrapVue);
 Vue.use(VueAwesomeSwiper);
-Vue.use(VueHamburgerButton);
+Vue.use(VueHamburgerButton);  
 Vue.use(require('vue-moment'));
 
 
