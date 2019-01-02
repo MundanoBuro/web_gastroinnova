@@ -1,6 +1,6 @@
 <template>
     <div class="cover">
-        <router-link to="/business">
+        <router-link :to="cover.route">
             <img :src="cover.src">
             <div class="title">
                 <img src="img/cover/div.png">
@@ -16,13 +16,13 @@ export default {
 
   // Component's created function.
   created () {
-    this.cover = this.getRandomCover();
+    this.cover = this.getRandomCover();    
   },
 
   methods:{
     getRandomCover(){
       let randomInt = Math.floor(Math.random() * 2) + 0;
-      return this.covers[randomInt] 
+      return this.covers[randomInt];
     }
   },
 
@@ -33,12 +33,15 @@ export default {
       covers: [
         {
           src: "img/cover/cover1.jpg",
+          route : "/about/mission",
           title: "DLZ"
         },{
           src: "img/cover/cover2.jpg",
+          route: "/business",
           title: "READY MEALS"
         },{
           src: "img/cover/cover3.jpg",
+          route : "/info",
           title: "START UPS"
         }
       ]

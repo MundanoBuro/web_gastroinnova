@@ -11,7 +11,7 @@
           
           <ul class="pages">
 
-            <li   v-bind:class="{ hover: MENU.about }"
+            <li v-bind:class="{ hover: MENU.about }"
                   @mouseenter="setMenuHover('about',true)" 
                   @mouseleave="setMenuHover('about',false)">
 
@@ -34,9 +34,9 @@
                 <router-link to="/business">LÍNEAS DE NEGOCIO</router-link>
                 </div>
               <div class="link-sublinks">
-                <div class="link-sublink">DELIZ</div>
-                <div class="link-sublink">READY MEALS</div>
-                <div class="link-sublink">START-UPS GASTRONÓMICAS</div>
+                <div class="link-sublink"><router-link to="/bussines/dlz">DLZ</router-link></div>
+                <div class="link-sublink"><router-link to="/bussines/ready_meals">READY MEALS</router-link></div>
+                <div class="link-sublink"><router-link to="/bussines/start_ups">START-UPS GASTRONÓMICAS</router-link></div>
               </div>
             </li>
 
@@ -48,9 +48,9 @@
                 <router-link to="/info">INFORMACIÓN FINANCIERA</router-link>
                 </div>
               <div class="link-sublinks">
-                <div class="link-sublink">TAMAÑO DEL MERCADO</div>
-                <div class="link-sublink">EVOLUCIÓN DEL MERCADO</div>
-                <div class="link-sublink">PROYECCIONES DEL MERCADO</div>
+                <div class="link-sublink"><router-link to="/info/market_size">TAMAÑO DEL MERCADO</router-link></div>
+                <div class="link-sublink"><router-link to="/info/market_evolution">EVOLUCIÓN DEL MERCADO</router-link></div>
+                <div class="link-sublink"><router-link to="/info/market_projections">PROYECCIONES DEL MERCADO</router-link></div>
               </div>
             </li>
 
@@ -353,8 +353,29 @@ display: block;
           width: 10px;
           box-sizing: content-box;
           padding-right:10px;
+              position: relative;
+    left: 0.0em;
+    top: 0.0em;
+          -webkit-transition: all 150ms linear;
+-moz-transition: all 150ms linear;
+-ms-transition: all 150ms linear;
+-o-transition: all 150ms linear;
+transition: all 150ms linear;
         }
 
+      }
+      &.hover{
+        .link-title img{
+              position: relative;
+    left: -0.5em;
+    top: 0.25em;
+
+          -moz-transform: rotate(90deg);
+-webkit-transform: rotate(90deg);
+-o-transform: rotate(90deg);
+-ms-transform: rotate(90deg);
+transform: rotate(90deg);
+        }
       }
       .link-sublinks{
         z-index: 100;

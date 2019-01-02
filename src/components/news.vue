@@ -39,13 +39,22 @@ export default {
             this.news.push({
                 date : doc_data.date.toDate(),
                 content: doc_data.content
-            })
-            console.log(doc_data.date.seconds)
+            });
+            
         });
 
-    });
+        this.news = this.news.slice(0,3);
+
+
+    })
 
   },
+
+
+  mounted(){
+
+  },
+
 
   methods:{ 
 
@@ -66,6 +75,8 @@ export default {
 </script>
 
 <style scoped lang="less">
+
+
 
 ul{list-style: none outside none;}
 
@@ -217,4 +228,47 @@ li{
     }
 }
 
+
+ .news{
+        width: 100%;
+        box-sizing: border-box;
+        ul{
+            width: 100%;
+            box-sizing: border-box;
+            li{
+                width: 100%;
+                box-sizing: border-box;
+                .date{
+                    width: 100%;
+                    padding: 0.5em;
+                    margin: 0.5em;
+                }
+                .text{
+                    width: 100%;
+                    margin: 0.5em;
+                    padding: 0.5em;
+                }   
+            }
+        }
+    }
+@media (min-width: 600px) {
+ .news{
+        width: 100%;
+        box-sizing: border-box;
+        ul{
+            width: 100%;
+            box-sizing: border-box;
+            li{
+                width: 100%;
+                box-sizing: border-box;
+                .date{
+                    width: 10em;
+                }
+                .text{
+                    width: calc(100% - 15em);
+                }   
+            }
+        }
+    }
+}
 </style>
