@@ -60,6 +60,10 @@ var config = {
 firebase.initializeApp(config);
 Vue.config.productionTip = false
 
+const firestore = firebase.firestore();
+const settings = {/* your settings... */ timestampsInSnapshots: true};
+firestore.settings(settings);
+
 new Vue({
   router,
   store,

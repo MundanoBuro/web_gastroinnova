@@ -1,0 +1,113 @@
+/** 
+*  ------------------------------------------------------------------- 
+* |  GastroInnova WebSite :: Vue.js
+* |  Module :: _sections.less 
+* |  Author :: Jorge Luis Mayorga
+* |  Update :: 04/01/29
+* |  
+*  -------------------------------------------------------------------
+*/
+
+
+
+// ------------------------------------------------------------------ //
+// -- @Component -> Variables 
+// ------------------------------------------------------------------ //
+    @section-block-width : 0px;
+    @section-block-height : 0px;
+// ------------------------------------------------------------------ //
+
+
+// ------------------------------------------------------------------ //
+// -- @Imports Libs,Vendors and Less Modules 
+// ------------------------------------------------------------------ //
+    @import "./__sections.less/_section_header.less";
+    @import "./__sections.less/_Section_content.less";
+// ------------------------------------------------------------------ //
+
+
+// ------------------------------------------------------------------ //
+// -- Class :: section
+// ------------------------------------------------------------------ //
+
+section.section{
+
+    // ------------------------- //
+    // -- constructor() -------- //
+    // ------------------------- //
+
+        width: 100%;
+        min-width: 250px;
+        max-width: 1000px;
+
+        margin: 0 auto;
+
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+    
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        //.flex-layout-rows-x-space-between-y-start();
+
+        &.color-yellow{
+            --section-color: orange;
+        }
+
+        &.color-green{
+            --section-color: green;
+          }
+
+    // ------------------------- //
+
+
+
+ 
+
+    
+    // -------------------------- //
+    // -- SubComponent :: Header -//
+    // -------------------------- //
+        &.display-normal{
+            .section-header(@display-type-class:'normal');
+        }
+        &.display-hide{
+            .section-header(@display-type-class:'hide');
+        }
+       
+    // -------------------------- //
+
+
+    // --------------------------- //
+    // -- SubComponent :: Content -//
+    // --------------------------- //
+        &.display-normal{
+            .section-content(@display-type-class:'normal');
+        }
+        &.display-hide{
+            .section-content(@display-type-class:'hide');
+        }
+       
+    // --------------------------- //
+
+
+    // --------------------------- //
+    // -- Responsive Design ------ //
+    // --------------------------- //
+
+        @media @tablet {
+
+        }
+
+        @media @desktop {
+
+        }
+    // --------------------------- //
+    
+    
+}
+
+// ------------------------------------------------------------------------- //
+
+

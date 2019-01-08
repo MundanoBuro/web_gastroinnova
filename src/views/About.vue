@@ -49,13 +49,23 @@ export default {
         }else{
           this.sections[2].hover = false;
         }
+    },
+
+    mSectionDisplayToogle(id){
+      if( this.sections[id].ui.displayClass == 'display-normal'){
+        this.sections[id].ui.displayClass = 'display-hide';
+        this.sections[id].hover = false;
+      }else{
+        this.sections[id].ui.displayClass = 'display-normal';
+        this.sections[id].hover = true;
+      }
     }
 
   },
 
 
   watch: { 
-      	scrollToId: function(newVal, oldVal) { // watch it
+      	scrollToId: function(newVal, oldVal) {
           this.updateScrollToId();
         }
   },
@@ -63,22 +73,37 @@ export default {
   // Component's Attributes or data object.
   data () {
     return{
-      bannerSrc: '/img/about/banner.png',
+      banner:{
+        src :'/img/banners/banner_about.jpg',
+        title : 'Nosotros'
+      },
       sections: [
         {
           id: 0,
           hover: false,
-          title: 'Misión y Visión',
+          title: 'Misión y Visión _',
+          ui:{
+            colorClass:'color-yellow',
+            displayClass: 'display-normal', 
+          },
           content: vMission
         },{
           id: 1,
           hover : false,
-          title: 'Historia',
+          title: 'Historia ______',
+          ui:{
+            colorClass:'color-green',
+            displayClass: 'display-normal', 
+          },
           content: vHistory
         },{
           id: 2,
           hover: false,
-          title: 'Nuestra Gente',
+          title: 'Nuestra Gente _',
+          ui:{
+            colorClass:'color-yellow',
+            displayClass: 'display-normal', 
+          },
           content: vOurPeople
         },
       ]
@@ -88,156 +113,50 @@ export default {
 </script>
 
 <template>
-  <div class="about">
+  <div class="view about">
     
-    <img class="banner" :src="bannerSrc">
+    <div class="view-banner">
+      <div class="image"><img :src="banner.src"></div>
+      <div class="title">
+          <div class="wrapper">
+            <h1> {{ banner.title }}</h1>
+          </div>
+      </div>
+    </div>
 
-    <section v-for="item in sections" v-bind:key="item.id">
-      <div class="title-block" @click="item.hover = !item.hover" v-bind:class="{ active: item.hover }">
-        <img src="../assets/gi-cards-div.png" class="title-block-div-green">
-        <img src="../assets/gi-cards-div-y.png" class="title-block-div-yellow">
-        <h3>{{ item.title }}</h3>
-      </div>
-      <div class="title-content">
-        <div v-if="item.hover">
-          <component :is="item.content" :data="item.content" v-if="item.content"/>
+    <div class="view-content">
+
+      <section  v-for="section in sections" v-bind:key="section.id" 
+                class="section about" :class="[ section.ui.colorClass , section.ui.displayClass ]">
+        
+        <div class="section-header">
+          <div class="wrapper"  @click="mSectionDisplayToogle(section.id)">
+            <img class="div-icon div-icon-green" src="./../assets/gi-cards-div.png" alt="" v-if="section.ui.colorClass=='color-yellow'">
+            <img class="div-icon div-icon-yellow" src="./../assets/gi-cards-div-y.png" alt="" v-if="section.ui.colorClass=='color-green'">
+            <h2 class="div-title"> {{section.title}} </h2>
+          </div>
         </div>
-      </div>
-    </section>
+
+        <div class="section-content">
+          <div class="wrapper">
+            <component :is="section.content" :data="section.content" v-if="section.hover"/>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+    
 
   </div>
 </template>
 
-<style lang="less" scoped>
-
-    .banner{
-      margin-bottom: 2em;
-      width: 100vw;
-    }
-
-    section{
-
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-      flex-direction: row;
-      -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-      -webkit-justify-content: flex-start;
-      -ms-flex-pack: start;
-      justify-content: flex-start;
-      -webkit-align-content: stretch;
-      -ms-flex-line-pack: stretch;
-      align-content: stretch;
-
-    
-
-      .title-block{
-        background-color: orange;
-        width: calc(30% - 1em);
-        padding-bottom: 1em;
-        color: white;
-
-        margin-bottom: 1em;
-    
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-direction: row;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        flex-direction: row;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        -ms-flex-pack: start;
-        -webkit-box-pack: start;
-        justify-content: flex-start;
-        -ms-flex-line-pack: center;
-        align-content: flex-start;
-        -ms-flex-align: center;
-        -webkit-box-align: start;
-        align-items: flex-start;
-        
-        img{
-          width:1em;
-          padding: 1em;
-          box-sizing: content-box;
-        }
-        h3{
-          padding: 0px;
-          margin: 0px;
-          padding: 0.5em;
-          font-size: 1.25em;
-        }
-      }
-      .title-content{
-        
-        display: block;
-
-        width: calc(70% - 1em);
-        margin-left: 1em;
-      padding-bottom: 1em;
-      border-top: 5px solid orange;
-      }
-    }
-
-    section{
-        &:nth-child(odd){
-          .title-block{background-color: green;}
-          .title-block-div-green{display: none}
-          .title-block-div-yellow{display: block;}
-        }
-        &:nth-child(even){
-          .title-block{background-color: orange;}
-          .title-block-div-green{display: block}
-          .title-block-div-yellow{display: none;}
-        }
-    }
-
-    .title-block{
-      cursor: pointer;
-      .title-block-div-green,.title-block-div-yellow{
-        -webkit-transition: -webkit-transform .258s ease-in-out;
-        -ms-transition: -ms-transform .258s ease-in-out;
-        transition: transform .258s ease-in-out; 
-        
-          transform:rotate(0deg);
-        -ms-transform:rotate(0deg);
-        -webkit-transform:rotate(0deg);
-      }
-      &.active{
-        .title-block-div-green,.title-block-div-yellow{
-          transform:rotate(-90deg);
-        -ms-transform:rotate(-90deg);
-        -webkit-transform:rotate(-90deg);
-      }
-      }
-    }
-
-    section {
-      display: block;
-    }
-    section .title-block{width: 100%; margin: 0em; padding: 0em}
-    section .title-content{width: 100%;min-height: 100vh;margin: 0em; padding: 0em}
-
-    @media (min-width: 600px) {
-     
-    section {
-      display: flex;
-    }
-
-     section .title-block{display: flex; width:calc(30% - 1em);margin: 1em; padding: 1em}
-     section .title-content{display: flex; min-height: 45em; width: calc(70% - 1em);margin: 1em; padding: 1em}
-     
-    }
-
-
+<style lang="less">
+/* ----------------------------------------------------------- 
+ //  View :: About.vue 
+ //  
+ //
+ ------------------------------------------------------------- */
+    @import (reference) '../styles/main.less';
 
 </style>

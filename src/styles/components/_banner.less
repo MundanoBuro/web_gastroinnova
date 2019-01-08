@@ -1,0 +1,225 @@
+/** 
+*  ------------------------------------------------------------------- 
+* |  GastroInnova WebSite :: Vue.js
+* |  Module :: _banner.less 
+* |  Author :: Jorge Luis Mayorga
+* |  Update :: 04/01/29
+* |  
+*  -------------------------------------------------------------------
+*/
+
+
+
+
+// ------------------------------------------------------------------ //
+// -- @Imports Libs,Vendors and Less Modules 
+// ------------------------------------------------------------------ //
+
+// ------------------------------------------------------------------ //
+
+
+
+
+// ------------------------------------------------------------------ //
+// -- @Component -> Variables 
+// ------------------------------------------------------------------ //
+    @banner_size_heigth : 300px;
+    @banner_border_size : 25px;
+    @banner_padding_size : 25px;
+// ------------------------------------------------------------------ //
+
+
+
+
+// ------------------------------------------------------------------ //
+// -- Class :: view-banner 
+// ------------------------------------------------------------------ //
+    
+    .view-banner{
+
+        // ------------------------- //
+        // -- constructor() -------- //
+        // ------------------------- //
+
+            // Display Type & Position
+            display: block;
+            position: relative;
+
+            // Layer Position
+            z-index: 0;
+
+            // Sizes
+            height: @banner_size_heigth - 2*@banner_padding_size - 2*@banner_border_size;
+            width: 100%;
+
+            //Overflow
+            overflow: hidden;
+
+        // ------------------------- //
+
+        
+        // ------------------------- //
+        // -- SubComponent :: Image -//
+        // ------------------------- //
+            .view-banner-image();
+        // ------------------------- //
+
+
+        // ------------------------- //
+        // -- SubComponent :: Title -//
+        // ------------------------- //
+            .view-banner-title();  
+        // ------------------------- //
+
+        @media @tablet {
+            height: (@banner_size_heigth - 2*@banner_padding_size - 2*@banner_border_size);
+        }
+        @media @desktop {
+            height: @banner_size_heigth - 2*@banner_padding_size - 2*@banner_border_size;
+        }
+        
+    }
+
+// ------------------------------------------------------------------------- //
+
+
+
+
+// -------------------------------------------------------------------------- //
+// -- Factory // view-banner-> title                                          //
+// -------------------------------------------------------------------------- //
+    .view-banner-title() {
+
+        // ------------------------------------------------------------------ //
+        // -- Class :: view-banner-> title                                    //
+        // ------------------------------------------------------------------ //
+        .title{
+
+            // -------------------------- //
+            // -- Title :: constructor()  //
+            // -------------------------- //
+
+            display: block;
+            position: absolute;
+
+            height: @banner_size_heigth - 2*@banner_padding_size - 2*@banner_border_size;
+            background-color: rgba(255,255,255,0.0);
+
+            padding: 0*@banner_padding_size;
+            margin: 0*@banner_padding_size;
+
+            box-sizing: content-box;
+
+            .border-gradient();
+            .flex-layout-rows-x-start-y-center();
+
+            .wrapper{
+
+                display: block;
+                background-color: rgba(255,255,255,0.35);
+    
+                color: white;
+                font-size: 0px;
+    
+                padding: @banner_border_size;
+                height: @banner_size_heigth;
+                
+            }
+        
+            h1{
+
+                // Display Type & Position
+                display: block;
+                position: relative;
+
+                padding:0px;
+                margin: 0px;
+                
+                padding-left: 0px;
+                padding-right: 0px;
+
+                top: 0em;
+                left: 0em;
+
+                color: #ffffff;
+                font-size: 70px;
+
+                text-align: left;
+
+                @media @tablet {
+                    font-size: 90px;
+                    padding-left: 1*@banner_padding_size;
+                    padding-right: 2*@banner_padding_size;
+                }
+
+                @media @desktop {
+                    font-size: 120px;
+                    padding-left: 2*@banner_padding_size;
+                     padding-right: 3*@banner_padding_size;
+                }
+
+                
+            }
+        }
+        // ------------------------------------------------------------------ //
+
+    }
+// -------------------------------------------------------------------------- //
+
+
+
+// -------------------------------------------------------------------------- //
+// -- Factory // view-banner-> image                                          //
+// -------------------------------------------------------------------------- //
+    .view-banner-image() {
+
+        // ------------------------------------------------------------------ //
+        // -- Class :: view-banner-> image                                    //
+        // ------------------------------------------------------------------ //
+        .image{
+            
+            display: block;
+            position: absolute;
+        
+            height: @banner_size_heigth;
+            width: 100%;
+
+            img{
+
+                -o-object-fit: cover;
+                object-fit: cover;
+
+                -o-object-position: center;
+                object-position: center;
+
+                height: @banner_size_heigth;
+                width: 100%;
+            }
+
+        }
+        // ----------------------------------------------------------------- //
+
+    }
+// ------------------------------------------------------------------------- //
+
+
+
+.border-gradient(){
+      background: repeating-linear-gradient(
+        140deg,
+        rgba(255,255,255,0.10),
+        rgba(255,255,255,0.10) 3px,
+        rgba(255,255,255,0.0) 3px,
+        rgba(255,255,255,0.0) 12px
+      );
+}
+
+.border-gradient-inv(){
+    background: repeating-linear-gradient(
+      140deg,
+      rgba(255,255,255,0.0),
+      rgba(255,255,255,0.0) 3px,
+      rgba(255,255,255,0.30) 3px,
+      rgba(255,255,255,0.30) 12px
+    );
+}

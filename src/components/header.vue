@@ -411,7 +411,7 @@ transform: rotate(90deg);
 .desktop{
   display: none;
 }
-@media (min-width: 600px) {
+@media (min-width: 800px) {
   .mobile{
     display: none;
   }
