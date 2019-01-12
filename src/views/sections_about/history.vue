@@ -1,144 +1,240 @@
 <script>
-
+import firebase from 'firebase';
 
 export default {
 
+  created(){
+
+   const firestore = firebase.firestore();
+
+    var timeline_db = firestore.collection('Timeline');
+    timeline_db.get().then(snapshot => {
+
+      
+      //Loop over timeline-dates
+      snapshot.forEach(doc => {
+        const rawDateFromTimeline =  doc.data();
+        this.addDateToTimeline(rawDateFromTimeline);
+      });
+
+    }).catch( error => {
+        console.error(error);
+    });
+
+  },
+
+  methods:{
+    
+    addDateToTimeline(rawData) {
+      
+      const rawTimeline = {
+        id: ( new Date() ).getTime(),
+        date : rawData.date.toDate(),
+        src: rawData.image,
+        text : rawData.text
+      };
+
+      const rawYear = rawTimeline.date.getFullYear();
+
+      this.TIMELINES.map( timeline => {
+        if(timeline.year == rawYear){
+          timeline.dates.push(rawTimeline);
+        }
+      });
+
+
+
+    }
+
+  },
+
   data(){
     return{
-      timeline: [
-        { type: 'content',
-          year: 2015,
-          color: 'green',
-          iconSrc: '/img/timeline/date1.png',
-          text: 'Gastroinnova SAS nace a finales de 2015 dedicada a la fabricación de comidas preparadas (Ready Meals), empacadas al vacío y pasteurizadas para conservar su frescura y sabor hasta por (90) días en refrigeración, utilizando tecnología MICVAC.' 
-        },{
-          type: 'middle',
-          iconSrc: '/img/timeline/div1.png'
-        },
-        
-        
-        {type: 'content',
-          color: 'orange',
-          year: 2016,
-          iconSrc: '/img/timeline/date2.png',
-          text: 'En Mayo de 2016 Gastroinnova Internacional adquiere el 100% del capital accionario de Gastroinnova SAS.' 
-        },{
-          type: 'content',
-          color: 'orange',
-          iconSrc: '/img/timeline/date3.jpeg',
-          text: 'En julio 2016 se traslada la operación a la zona franca de Intexzona, con una capacidad instalada de hasta 8.000 uds diarias, con 2 turnos.' 
-        },{
-          type: 'content',
-          color: 'orange',
-          iconSrc: '/img/timeline/date4.png',
-          text: 'Desde mediados de 2016 se inicia el desarrollo del proyecto DELIZ destinado a convertirse en el de mayor impacto en la empresa 2017.' 
-        },{
-          type: 'middle',
-          iconSrc: '/img/timeline/div2.png'
-        },
-        
-        
-        
-        {
-          type: 'content',
-          color: 'red',
-          year: 2017,
-          iconSrc: '/img/timeline/date5.png',
-          text: 'En diciembre 2017 se inaugura el primer local de comida DELIZ. A la fecha existen 7 restaurantes en operación y 3 en proceso de apertura.' 
-        },{
-          type: 'middle',
-          iconSrc: '/img/timeline/div3.png'
-        },
-        
-        { type: 'content',
-          year: 2018,
-          color: 'yellow',
-          iconSrc: '/img/timeline/date6.png',
-          text: 'En 2018 comercializamos 12 recetas y contamos con 22 recetas con registro INVIMA. También este año se inicia una tercera línea de negocios con la negociación de las marcas Bukara y Smoky Monkey, primeras 2 iniciativas del proyecto de Start-Ups Gastronómicas.' 
-        },{
-          type: 'middle',
-          iconSrc: '/img/timeline/div4.png'
-        },
+        TIMELINES : [
 
+    
+          {
+            year: 2015,
+            color : 'green',
+            dates: []
+          },
 
-      ]
+          {
+            year: 2016,
+            color : 'orange',
+            dates: []
+          },
+
+          {
+            year: 2017,
+            color : 'red',
+            dates: []
+          },
+
+          {
+            year: 2018,
+            color : 'yellow',
+            dates: []
+          }
+          
+        ]
     }
   }
 }
 </script>
+
+
+
 <template>
-  <div id="about-history" class="timeline-list">
-    
+  <div class="timeline" id="about-history">
+    <div class="timeline-wrapper">
 
-    
-    <div class="timeline-item" v-for="item in timeline">
-      <div v-if="item.type=='content'" class="row">
-          <div class="col date" :class="item.color"> 
-            {{ item.year }}
-          </div>
-          <div class="col icon logo"> <img :src="item.iconSrc"> </div>
-          <div class="col text" style="flex-grow: 1;"> {{ item.text}} </div>
+      
+
+      <div class="timelime-item" v-for="kTimeline in TIMELINES" v-bind:key="kTimeline.year">
+       
+
+        <div class="timeline-item-type-content" v-for="kDates in kTimeline.dates" v-bind:key="kDates.id">
+              
+              <div class="col dates" :class="['gi-'+kTimeline.color]"> 
+                <h4>{{ kDates.date.getFullYear() }}</h4>
+              </div>
+              
+              <div class="col thumbs"> 
+                <img :src="kDates.src" width="100%">
+              </div>
+              
+              <div class="col text">
+                <p>
+                  {{ kDates.text }}
+                </p>
+              </div>
+
+        </div>
+
+        <div class="timeline-item-type-division">
+          
+            <img class="div-icon div-icon-green" src="../../assets/timeline/DIV_0.png" alt="" v-if="kTimeline.color=='green'" width="100%">
+            <img class="div-icon div-icon-orange" src="../../assets/timeline/DIV_1.png" alt="" v-if="kTimeline.color=='orange'" width="100%">
+            <img class="div-icon div-icon-red" src="../../assets/timeline/DIV_2.png" alt="" v-if="kTimeline.color=='red'" width="100%">
+            <img class="div-icon div-icon-yellow" src="../../assets/timeline/DIV_3.png" alt="" v-if="kTimeline.color=='yellow'" width="100%">
+
+        </div>
+
+
       </div>
-      <div v-if="item.type=='middle'" class="row">
-          <div class="col icon div"> <img :src="item.iconSrc"> </div>
-      </div>
-    </div>
-
-
-
+      
+    </div>    
   </div>
 </template>
 
 <style lang="less" scoped>
-.row{
-  padding: 0px;
-  margin: 0px;
-}
-.col{
-  flex-grow: 0;
-  margin: 0px;
-  padding: 0px;
-  &:last-child{
-    flex-grow: 0;
-  }
-}
-.date{
-      min-width: 6.25em;
-  width: 8em;
-  padding: 2em;
-  color: white;
+h2{
+  color:black !important;
 }
 
+.timeline-item-type-content{
+  display: block;
+  .thumbs{
+    width: 12em;
+    height: 8em;;
+    display: inline-block !important;
+    vertical-align: top;
+    float: left;
+    img{
+          margin-top: 1em;
+    }
+  }
+  .dates{
+    width: 12em;
+    height: 8em;
+    float: left;
+    display: inline-block !important;
+    vertical-align: top;
+  }
+  .text{
+    width: calc(100% - 25em);
+    height: 8em;;
+    display: inline-block !important;
+    vertical-align: top;
+  }
+}
+
+
+
+
+.thumbs,.dates,.text{
+  display: inline-block;
+}
+
+
+
+
+
+
+
+.thumbs,.div-icon,.dates{
+  display: block;
+  width: 12em;
+  text-align: center;
+}
+
+
+.timeline-item-type-division{
+          width: calc(8em +0px);
+          padding-left: 0px;
+          
+      img{
+        width: calc(8em + 0px);
+        padding-left: 0px;
+       
+      }
+}
+.dates{
+
+  width: 8em !important;
+
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+      display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+  h4{
+    font-weight: 200;
+    text-align: center;
+    margin: 0 auto;
+  }
+  &.gi-green{
+        background-color: #8bc53f !important;
+  }
+  &.gi-orange{
+        background-color: #e5520f !important;
+  }
+  &.gi-red{
+        background-color: #961934 !important;
+  }
+  &.gi-yellow{
+        background-color: #ffb90f !important;
+  }
+}
 .text{
-  width: 5em;
-  font-size: 0.9em;
-  text-align: left;
-  padding: 1em;
-}
-
-
-
-.green{background-color:#8BC53F;}
-.orange{background-color:#E5520F;}
-.red{background-color:#961934;}
-.yellow{background-color: #FFB90F;}
-
-.icon{
-
-  &.logo{
-  img{
-    padding: 1em;
-  margin: 0em;
-  width: 6.25em;
-  }
-  }
-  &.div{
-  img{
-    padding: 0em;
-  margin: 0em;
-  width: 6.25em;
-  }
-  }
 
 }
 </style>

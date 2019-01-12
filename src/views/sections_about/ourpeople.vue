@@ -1,9 +1,54 @@
 <script>
+import firebase from 'firebase';
+
 export default {
+
+  created(){
+
+   const firestore = firebase.firestore();
+
+    var company_db = firestore.collection('Company_People');
+    company_db.get().then(snapshot => {
+
+      
+      //Loop over timeline-dates
+      snapshot.forEach(doc => {
+        const people =  doc.data();
+        this.COMPANY[people.type].position = people.position;
+        this.COMPANY[people.type].name = people.name;
+      });
+
+    }).catch( error => {
+        console.error(error);
+    });
+
+  },
 
   data(){
     return{
+      COMPANY : {
 
+        CEO : {
+          position : '',
+          name: ''
+        },
+
+        PLANNING : {
+          position : '',
+          name: ''
+        },
+
+        EXPANSION: {
+          position : '',
+          name: ''
+        },
+
+        FINANCIAL : {
+          position : '',
+          name: ''
+        }
+
+      }
     }
   }
 }
@@ -15,25 +60,25 @@ export default {
     <img class="logo" src="../../assets/logo.png">
 
     <div class="people-orientador-general">
-      <div class="position">Orientador General</div>
-      <div class="name">Rafael Hernández Mujica</div>
+      <div class="position"> {{ COMPANY.CEO.position }} </div>
+      <div class="name">{{ COMPANY.CEO.name }}</div>
     </div>
 
     <div class="people-orientadores">
 
       <div class="people-orientador">
-        <div class="position">Orientador de Planeación y Desarrollo</div>
-        <div class="name">Božo Pavic</div>
+      <div class="position"> {{ COMPANY.PLANNING.position }} </div>
+      <div class="name">{{ COMPANY.PLANNING.name }}</div>
       </div>
 
       <div class="people-orientador">
-        <div class="position">Orientador de Expansión</div>
-        <div class="name">Mónica Calderón</div>
+        <div class="position"> {{ COMPANY.EXPANSION.position }} </div>
+        <div class="name">{{ COMPANY.EXPANSION.name }}</div>
       </div>
 
       <div class="people-orientador">
-        <div class="position">Orientador Financiero y Administrativo</div>
-        <div class="name">Mauricio Orozco</div>
+        <div class="position"> {{ COMPANY.FINANCIAL.position }} </div>
+        <div class="name">{{ COMPANY.FINANCIAL.name }}</div>
       </div>
     
     </div>

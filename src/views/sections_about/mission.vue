@@ -71,7 +71,7 @@ export default {
 </script>
 
 <template>
-  <div class="mission_and_vision">
+  <div class="mission_and_vision" id="about-mission">
     
     <div class="col thumbs">
       <img :src="thumb.src" :alt="thumb.alt" v-for="thumb in THUMBS" v-bind:key = "thumb.id" width="150px">

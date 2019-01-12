@@ -139,7 +139,7 @@ export default {
 
         <div class="section-content">
           <div class="wrapper">
-            <component :is="section.content" :data="section.content" v-if="section.hover"/>
+            <component :is="section.content" :data="section.content" v-show="section.hover"/>
           </div>
         </div>
 

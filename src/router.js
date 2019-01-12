@@ -65,11 +65,11 @@ export default new Router({
     },{
       path: '/terms',
       name: 'terms',
-      component: Contact
+      component: Terms
     },{
       path: '/policy',
       name: 'policy',
-      component: Contact
+      component: Policy
     },{
       path: '/admin',
       name: 'admin',
