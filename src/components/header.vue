@@ -39,7 +39,7 @@
                 <img src="../assets/header/gi-header-div.png">
                 <router-link to="/business">LÍNEAS DE NEGOCIO</router-link>
               </div>
-              <div class="link-sublinks" style="left:0.5em">
+              <div class="link-sublinks" style="left:0.5em;">
                 <div class="link-sublink">
                   <router-link to="/bussines/dlz">DLZ</router-link>
                 </div>
@@ -61,7 +61,7 @@
                 <img src="../assets/header/gi-header-div.png">
                 <router-link to="/info">INFORMACIÓN FINANCIERA</router-link>
               </div>
-              <div class="link-sublinks" style="left:0.5em">
+              <div class="link-sublinks" style="left:0.5em;">
                 <div class="link-sublink">
                   <router-link to="/info/market_size">TAMAÑO DEL MERCADO</router-link>
                 </div>
