@@ -81,7 +81,7 @@ export default {
         {
           id: 0,
           hover: false,
-          title: 'Misión y Visión _',
+          title: 'Misión y Visión',
           ui:{
             colorClass:'color-yellow',
             displayClass: 'display-normal', 
@@ -90,7 +90,7 @@ export default {
         },{
           id: 1,
           hover : false,
-          title: 'Historia ______',
+          title: 'Historia',
           ui:{
             colorClass:'color-green',
             displayClass: 'display-normal', 
@@ -99,7 +99,7 @@ export default {
         },{
           id: 2,
           hover: false,
-          title: 'Nuestra Gente _',
+          title: 'Nuestra Gente',
           ui:{
             colorClass:'color-yellow',
             displayClass: 'display-normal', 
