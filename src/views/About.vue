@@ -20,6 +20,9 @@ export default {
 
   // Component's created function.
   mounted() {
+    this.sections[0].ui.displayClass = "display-hide";
+    this.sections[1].ui.displayClass = "display-hide";
+    this.sections[2].ui.displayClass = "display-hide";
     this.updateScrollToId();
   },
 

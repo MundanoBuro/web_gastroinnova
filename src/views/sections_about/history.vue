@@ -180,11 +180,11 @@ h2 {
 }
 
 .timeline-item-type-division {
-  width: calc(8em +0px);
+  width: 8em;
   padding-left: 0px;
 
   img {
-    width: calc(8em + 0px);
+    width:8em;
     padding-left: 0px;
   }
 }
